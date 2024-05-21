@@ -27,4 +27,10 @@ export const Container = styled.div`
     ${mixins.limitContainer}
     background-color: ${(props) => props.theme.white};
     padding: 24px;
+    min-height: 100vh;
+    border-radius: 10px;
+`
+
+export const Main = styled.main`
+    margin-bottom: 80px;
 `
