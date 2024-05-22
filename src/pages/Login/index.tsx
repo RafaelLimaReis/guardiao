@@ -1,6 +1,5 @@
 import { Eye, EyeSlash } from 'phosphor-react'
-import logo from '../../assets/logo2.svg'
-import { Container, ContainerForm, InputPassword, Input, ButtonLogin } from './styles'
+import { Container, ContainerForm, InputPassword, ButtonLogin, Input } from './styles'
 import { useState } from 'react'
 
 export function Login() {
@@ -8,7 +7,6 @@ export function Login() {
 
     return (
         <Container>
-            <img src={logo} alt="Imagem de logo" />
             <div>
                 <p>Acessar Administrativo</p>
                 <ContainerForm>

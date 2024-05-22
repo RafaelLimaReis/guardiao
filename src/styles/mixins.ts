@@ -47,10 +47,5 @@ export const mixins = {
     limitContainer: css`
         max-width: 600px;
         margin: 0 auto;
-
-        @media (max-width: 905px) {
-            margin-left: 1rem;
-            margin-right: 1rem;
-        }
     `,
 }

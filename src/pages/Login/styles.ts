@@ -6,12 +6,6 @@ export const Container = styled.div`
     flex-direction: column;
     gap: 24px;
 
-    img {
-        width: 100px;
-        height: auto;
-        margin: 0 auto;
-    }
-
     p {
         ${mixins.fonts.titleL}
 

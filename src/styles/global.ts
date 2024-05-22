@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
 export const Container = styled.div`
     ${mixins.limitContainer}
     background-color: ${(props) => props.theme.white};
-    padding: 24px;
+    padding: 10px;
     min-height: 100vh;
     border-radius: 10px;
 `
