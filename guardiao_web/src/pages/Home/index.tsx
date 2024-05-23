@@ -1,7 +1,8 @@
 import { MagnifyingGlass } from "phosphor-react";
-import { Container, ContainerItems, InputSearch } from "./styles";
+import { ContainerItems, InputSearch } from "./styles";
 
 import produtoTeste from '../../assets/produto_teste.png';
+import { ContainerMain } from "../../styles/global";
 
 //TODO criar forma de exibir botão de adicionar novo produto (so segurança)
 //TODO as fotos devem ficar sem cor (aluno) e com cor (segurança)
@@ -11,7 +12,7 @@ const isAdmin = true;
 
 export function Home() {
     return (
-        <Container>
+        <ContainerMain>
             <h1>itens encontrados</h1>
             <InputSearch>
                 <input type="text" name="input_seach" id="input_seach" placeholder="Buscar..."/>
@@ -86,6 +87,6 @@ export function Home() {
                     </div>
                 </div>
             </ContainerItems>
-        </Container>
+        </ContainerMain>
     )
 }

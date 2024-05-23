@@ -2,15 +2,6 @@ import styled from "styled-components";
 import { mixins } from "../../styles/mixins";
 import { ItemPropsInterface } from "../../interfaces/Item";
 
-export const Container = styled.div`
-    margin-top: 30px;
-    text-align: center;
-
-    h2 {
-        ${mixins.fonts.titleS}
-    }
-`
-
 export const InputSearch = styled.div`
     display: flex;
     align-items: center;

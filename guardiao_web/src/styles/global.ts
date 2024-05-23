@@ -34,3 +34,12 @@ export const Container = styled.div`
 export const Main = styled.main`
     margin-bottom: 80px;
 `
+
+export const ContainerMain = styled.div`
+    margin-top: 30px;
+    text-align: center;
+
+    h1 {
+        ${mixins.fonts.titleM}
+    }
+`
