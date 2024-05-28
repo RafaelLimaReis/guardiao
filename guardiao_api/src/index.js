@@ -4,8 +4,10 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const SecurityModel = require('./models/security');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 async function createSecurityDefault() {
     try {

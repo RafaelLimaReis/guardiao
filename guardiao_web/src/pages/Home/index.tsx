@@ -5,12 +5,11 @@ import produtoTeste from '../../assets/produto_teste.png';
 import { ContainerMain } from "../../styles/global";
 
 //TODO criar forma de exibir botão de adicionar novo produto (so segurança)
-//TODO as fotos devem ficar sem cor (aluno) e com cor (segurança)
 //TODO cadastro o periodo deve ser combobox
 
-const isAdmin = true;
-
 export function Home() {
+    const isAdmin = localStorage.getItem('token') ? true : false;
+    
     return (
         <ContainerMain>
             <h1>itens encontrados</h1>
@@ -21,10 +20,11 @@ export function Home() {
                 </button>
             </InputSearch>
 
-            <ContainerItems isAdmin={isAdmin}>
+            <ContainerItems isadmin={isAdmin}>
                 <div>
                     <img src={produtoTeste} alt="" />
                     <div>
+                        <span><b>Item:</b> Garrafa termica</span>
                         <span><b>Data:</b> 22/05/2024</span>
                         <span><b>Local:</b> Sala de aula Sala de aula Sala de aula</span>
                         <span><b>Periodo:</b> noite</span>

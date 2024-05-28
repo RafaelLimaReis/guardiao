@@ -1,3 +1,3 @@
 export interface ItemPropsInterface {
-    isAdmin: boolean;
+    isadmin: boolean;
 }

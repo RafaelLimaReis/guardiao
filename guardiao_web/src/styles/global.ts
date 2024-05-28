@@ -38,6 +38,7 @@ export const Main = styled.main`
 export const ContainerMain = styled.div`
     margin-top: 30px;
     text-align: center;
+    position: relative;
 
     h1 {
         ${mixins.fonts.titleM}
