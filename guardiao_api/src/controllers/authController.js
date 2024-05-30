@@ -23,3 +23,19 @@ exports.login = async (req, res) => {
     res.status(500).send('Erro ao fazer login');
   }
 };
+
+exports.auth = (req, res, next) => {
+  const token = req.header('Authorization') && req.header('Authorization').split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Acesso negado. Token não fornecido.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, 'your_jwt_secret'); // Substitua 'seuSegredoJWT' pelo seu segredo
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.status(400).json({ message: 'Token inválido.' });
+  }
+}

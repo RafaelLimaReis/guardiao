@@ -56,6 +56,15 @@ export const Input = styled.input`
     width: 200px;
 `
 
+export const Select = styled.select`
+    background-color: ${props => props.theme["base-input"]};
+    border: none;
+    margin: 5px 0 10px 0;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+`
+
 export const LinkButton = styled(Link)`
     ${mixins.fonts.textM}
     text-decoration: none;

@@ -5,7 +5,11 @@ import { useState } from 'react'
 import api from '../../libs/axios';
 import axios, { AxiosResponse } from 'axios';
 
-export function Login() {
+interface LoginProps {
+    handlerLogin: (token: string) => void;
+}
+
+export function Login({handlerLogin}: LoginProps) {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
@@ -14,7 +18,7 @@ export function Login() {
     const handlerSubmitForm = async () => {
         try {
             const responseLogin: AxiosResponse = await api.post('/auth/login', { password: password, email: email});
-            localStorage.setItem('token', responseLogin.data.data.token);
+            handlerLogin(responseLogin.data.data.token);
             navigate('/');
         } catch (error) {
             if (axios.isAxiosError(error)) {

@@ -31,7 +31,7 @@ export const ContainerItems = styled.div<ItemPropsInterface>`
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2, minmax(145px, 1fr));
-    filter: ${props => !props.isadmin ? 'grayscale(100%)' : 'none'};
+    filter: ${props => !props.islogged ? 'grayscale(100%)' : 'none'};
     gap: 10px;
     cursor: pointer;
 

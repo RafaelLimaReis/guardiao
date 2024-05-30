@@ -13,6 +13,7 @@ export const HeaderContainer = styled.header`
         ${mixins.fonts.link}
         font-size: 14px;
         background-color: ${props => props.theme["base-background"]};
+        color: ${props => props.theme["black"]};
         padding: 5px 10px;
         border-radius: 5px;
 

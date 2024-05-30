@@ -3,13 +3,18 @@ import { Container, Main } from '../styles/global'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 
+interface DefaultLayoutProps {
+    isLogged: boolean;
+    handlerLoggout: () => void;
+}
 
-export function DefaultLayout() {
+export function DefaultLayout({ isLogged, handlerLoggout }: DefaultLayoutProps) {
+
     return (
         <Container>
-            <Header />
+            <Header isLogged={isLogged} handlerLoggout={handlerLoggout} />
             <Main>
-                <Outlet />
+                <Outlet/>
             </Main>
             <Footer />
         </Container>
