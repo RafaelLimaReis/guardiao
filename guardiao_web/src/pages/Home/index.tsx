@@ -1,31 +1,20 @@
 import { MagnifyingGlass } from "phosphor-react";
 import { ContainerItems, InputSearch } from "./styles";
-
+import { ItemProps } from '../../interfaces/Item';
 import { ContainerMain } from "../../styles/global";
-import { useCallback, useEffect, useState } from "react";
-import api from "../../libs/axios";
-import { ItemProps } from "../../interfaces/Item";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
+import { IPCONFIG } from "../../libs/configIp";
 
-export function Home() {
-    const isLogged = localStorage.getItem('token') ? true : false;
-    const [filter, setFilter] = useState('');
-    const [items, setItems] = useState<ItemProps[]>([]);
+interface HomeProps {
+    isLogged: boolean;
+    items: ItemProps[];
+    setFilter: (value: string) => void;
+}
 
-    const getItems = useCallback(async () => {
-        console.log(filter);
-        const items = await api.get('/item', {
-            params: {
-                q: filter
-            }
-        });
-        setItems(items.data);
-    }, [filter])
-
-    useEffect(() => {
-        getItems()
-    }, [filter, getItems])
-    
+export function Home({ isLogged, items, setFilter }: HomeProps) {
+    items = items.filter(item => item.retirada == null);
+    console.log(items);
     return (
         <ContainerMain>
             <h1>itens encontrados</h1>
@@ -38,15 +27,15 @@ export function Home() {
 
             <ContainerItems islogged={isLogged}>
                 {items.map(item => (
-                    <div key={item._id}>
-                        <img src={`http://localhost:3004${item.image}`} alt="" />
+                    <Link to={isLogged ? `/item/${item._id}` : '#'} key={item._id}>
+                        <img src={`${IPCONFIG}${item.image}`} alt="" />
                         <div>
                             <span><b>Item:</b> {item.name}</span>
                             <span><b>Data:</b> {format(new Date(item.data), "dd/MM/yyyy")}</span>
                             <span><b>Local:</b> {item.local}</span>
                             <span><b>Periodo:</b> {item.periodo}</span>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </ContainerItems>
         </ContainerMain>

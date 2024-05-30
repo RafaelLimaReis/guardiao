@@ -33,14 +33,15 @@ export const ContainerItems = styled.div<ItemPropsInterface>`
     grid-template-columns: repeat(2, minmax(145px, 1fr));
     filter: ${props => !props.islogged ? 'grayscale(100%)' : 'none'};
     gap: 10px;
-    cursor: pointer;
 
-    > div {
+    > a {
         min-height: 200px;
         max-width: 200px;
         border-radius: 6px;
         padding: 10px;
         background-color: ${props => props.theme["base-card"]};
+        color: ${props => props.theme["black"]};
+        text-decoration: none;
         margin: 0 auto;
         width: 100%;
 

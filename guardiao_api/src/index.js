@@ -48,6 +48,6 @@ app.use('/storage', express.static(path.join(__dirname, '../storage')));
 
 const PORT = process.env.PORT || 3004;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`listening on port ${PORT}`);
 })

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { IPCONFIG } from './configIp';
 
 const api = axios.create({
-    baseURL: 'http://localhost:3004',
+    baseURL: IPCONFIG,
 })
 
 api.interceptors.request.use(

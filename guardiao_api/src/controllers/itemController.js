@@ -15,7 +15,33 @@ exports.createItem = async (req, res) => {
         });
 
         await newItem.save();
-        res.status(201).send({ message: 'Item salvo com sucesso', item: newItem });
+        res.status(201).send({ message: 'Item salvo com sucesso', data: newItem });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: 'Erro ao salvar o item', error });
+    }
+};
+
+exports.updateItem = async (req, res) => {
+    const { _id, aluno, raAluno } = req.body;
+    console.log(req.body);
+    try {
+        const updateDoc = {
+            $set: {
+                'retirada.nomeAluno': aluno,
+                'retirada.raAluno': raAluno,
+                'retirada.dataRetirada': new Date(),
+                'retirada.seguranca': req.user._id
+            }
+        }
+        
+        const updateItem = await Item.findOneAndUpdate(
+            { _id: _id },
+            updateDoc,
+            { new: true }
+        );
+        console.log(updateItem);
+        res.status(201).send({ message: 'Item salvo com sucesso', data: updateItem });
     } catch (error) {
         console.log(error);
         res.status(500).send({ message: 'Erro ao salvar o item', error });

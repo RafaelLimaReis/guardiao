@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema({
     retirada: {
         nomeAluno: { type: String },
         raAluno: { type: String },
-        dataRetirada: { type: String },
+        dataRetirada: { type: Date },
         seguranca: { type: mongoose.Schema.Types.ObjectId, ref: 'Security' }
     }
 });
