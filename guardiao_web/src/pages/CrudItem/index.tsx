@@ -5,10 +5,11 @@ import { PlusCircle } from "phosphor-react"
 import React, { ChangeEvent, useRef, useState } from "react"
 import { ItemProps } from "../../interfaces/Item"
 import { format } from "date-fns"
+import { IPCONFIG } from "../../libs/configIp"
 
 interface crudItemProps {
     items?: ItemProps[];
-    managerItem: (formData: FormData|object, itemUpdate?: ItemProps) => boolean;
+    managerItem: (formData: FormData|object, itemUpdate?: ItemProps) => Promise<boolean>;
 }
 
 export function CrudItem({ items, managerItem }: crudItemProps) {
@@ -69,9 +70,9 @@ export function CrudItem({ items, managerItem }: crudItemProps) {
         }
 
         if (itemUpdate) {
-            responseUpdateState = managerItem(formData, itemUpdate);
+            responseUpdateState =  await managerItem(formData, itemUpdate);
         } else {
-            responseUpdateState = managerItem(formData);
+            responseUpdateState = await managerItem(formData);
         }
 
         if (responseUpdateState) {
@@ -88,7 +89,7 @@ export function CrudItem({ items, managerItem }: crudItemProps) {
                 {itemUpdate ? (
                     <>
                         <PreloadImage id="preload-image" onClick={handlePreviewLoadImage}>
-                            {<img src={`http://localhost:3004${itemUpdate.image}`} alt="Preview da imagem selecionada" />}
+                            {<img src={`${IPCONFIG}${itemUpdate.image}`} alt="Preview da imagem selecionada" />}
                         </PreloadImage>
                         <div style={{ display: "flex", flexDirection: "column" }}>
                             <span><b>Item:</b> {itemUpdate.name}</span>

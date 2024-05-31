@@ -16,6 +16,7 @@ export const HeaderContainer = styled.header`
         color: ${props => props.theme["black"]};
         padding: 5px 10px;
         border-radius: 5px;
+        cursor: pointer;
 
         text-decoration: none;
     }

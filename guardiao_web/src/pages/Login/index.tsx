@@ -7,9 +7,10 @@ import axios, { AxiosResponse } from 'axios';
 
 interface LoginProps {
     handlerLogin: (token: string) => void;
+    notify: (type: string, message: string) => void;
 }
 
-export function Login({handlerLogin}: LoginProps) {
+export function Login({handlerLogin, notify}: LoginProps) {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
@@ -20,16 +21,17 @@ export function Login({handlerLogin}: LoginProps) {
             const responseLogin: AxiosResponse = await api.post('/auth/login', { password: password, email: email});
             handlerLogin(responseLogin.data.data.token);
             navigate('/');
+            notify('success', 'Login realizado com sucesso');
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 //TODO tela de erro
                 // Se for, você pode acessar as propriedades específicas do erro Axios
                 console.error('Erro de solicitação Axios:', error.message);
-                console.error('Status da solicitação:', error.response?.status);
-                console.error('Dados da resposta:', error.response?.data);
+                notify('error', error.response?.data);
               } else {
                 // Se não for um erro Axios, apenas imprima o erro geral
                 console.error('Erro ao fazer a solicitação:', error);
+                notify('error', 'Ocorreu um erro');
               }
         }
     }
