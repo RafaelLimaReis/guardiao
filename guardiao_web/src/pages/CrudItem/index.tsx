@@ -79,10 +79,9 @@ export function CrudItem({ items, managerItem }: crudItemProps) {
             navigate('/');
         }
     }   
-
     return (
         <ContainerMain>
-            {item ? <h1>Registrar retirada</h1> : <h1>Cadastrar Item</h1>}
+            {item ? (itemUpdate && itemUpdate.retirada == null ? <h1>Registrar retirada</h1> : <h1>Item retirado</h1>) : <h1>Cadastrar Item</h1>}
 
             <ContainerForm onSubmit={handleSubmit}>
                 <input type="file" id="imageInput" accept="image/*" style={{ display: "none" }} ref={refInputImage} onChange={handleImageLoad} capture="environment" />
@@ -115,10 +114,22 @@ export function CrudItem({ items, managerItem }: crudItemProps) {
                         </Select>
                     </>
                 )}
-                {itemUpdate && <>
+                {itemUpdate && itemUpdate.retirada == null ? <>
                     <Input type="text" name="nome" placeholder="nome do aluno" id="nome" value={aluno} onChange={(e) => setAluno(e.target.value)} />
                     <Input type="text" name="RA" placeholder="RA do aluno" id="RA" value={ra} onChange={(e) => setRa(e.target.value)} />
-                </>}
+                </> : ( itemUpdate && 
+                    <>
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <h4 style={{margin: '15px auto'}}>Informações de retirada</h4>
+                            {itemUpdate.retirada.dataRetirada && (
+                                <span><b>Data:</b> {format(new Date(itemUpdate.retirada.dataRetirada), "dd/MM/yyyy")}</span>
+                            )}
+                            <span><b>Aluno:</b> {itemUpdate.retirada.nomeAluno}</span>
+                            <span><b>Ra:</b> {itemUpdate.retirada.raAluno}</span>
+                            <span><b>Segurança:</b> {itemUpdate.retirada.seguranca?.nome}</span>
+                        </div>
+                    </>                    
+                )}
 
                 <div>
                     <LinkButton to={'/'}>Voltar</LinkButton>

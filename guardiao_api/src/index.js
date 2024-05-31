@@ -6,6 +6,7 @@ const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const SecurityModel = require('./models/security');
+const ItemModel = require('./models/item');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 
@@ -13,22 +14,34 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+const CLEARDATABASE = false;
+
 async function createSecurityDefault() {
     try {
-      await SecurityModel.deleteMany({});
-      
-      const DefaultSecurity = [
-        { nome: 'Rafael Lima', email: 'rafael@teste.com', senha: 'senha123' },
-        { nome: 'Gabriel Lima', email: 'gabriel@teste.com', senha: 'outrasenha456' }
-      ];
-
-      for (const security of DefaultSecurity) {
-        const senhaHashed = await bcrypt.hash(security.senha, 10);
-        security.senha = senhaHashed;
+      if (CLEARDATABASE) {
+        await SecurityModel.deleteMany({});
+        await ItemModel.deleteMany({});
       }
 
-      await SecurityModel.insertMany(DefaultSecurity);
-      console.log('Seguranças padrão criados');
+
+      const countGuards = await SecurityModel.countDocuments({});
+      if (countGuards < 2) {
+      
+        const DefaultSecurity = [
+          { nome: 'Rafael Lima', email: 'rafael@teste.com', senha: 'senha123' },
+          { nome: 'Gabriel Lima', email: 'gabriel@teste.com', senha: 'outrasenha456' }
+        ];
+
+        for (const security of DefaultSecurity) {
+          const senhaHashed = await bcrypt.hash(security.senha, 10);
+          security.senha = senhaHashed;
+        }
+
+        await SecurityModel.insertMany(DefaultSecurity);
+        console.log('Seguranças padrão criados');
+      } else {
+        console.log('Seguranças padrão já existem');
+      }
     } catch (err) {
       console.error('Erro ao criar seguranças padrão', err);
     }

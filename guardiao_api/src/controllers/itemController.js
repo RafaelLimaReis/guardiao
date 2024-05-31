@@ -2,7 +2,6 @@ const Item = require('../models/item');
 
 exports.createItem = async (req, res) => {
     const { item, data, local, periodo } = req.body;
-    console.log(req.file);
     const imagePath = '/storage/' + req.file.filename;
     try {
         const newItem = new Item({
@@ -24,7 +23,6 @@ exports.createItem = async (req, res) => {
 
 exports.updateItem = async (req, res) => {
     const { _id, aluno, raAluno } = req.body;
-    console.log(req.body);
     try {
         const updateDoc = {
             $set: {
@@ -40,7 +38,6 @@ exports.updateItem = async (req, res) => {
             updateDoc,
             { new: true }
         );
-        console.log(updateItem);
         res.status(201).send({ message: 'Item salvo com sucesso', data: updateItem });
     } catch (error) {
         console.log(error);
@@ -57,8 +54,18 @@ exports.getItems = async (req, res) => {
                 { name: { $regex: searchQuery, $options: 'i' } }, // Filtro por nome
             ]}
         }
-        const items = await Item.find(query);
-        res.json(items);
+        const items = await Item.find(query).populate('retirada.seguranca').sort({ retirada: 1 });
+
+        // Modifique os itens para substituir o ID do segurança pelo nome
+        const modifiedItems = items.map(item => {
+            if (item.retirada && item.retirada.seguranca) {
+                // Substitua o ID do segurança pelo nome
+                item.retirada.seguranca = item.retirada.seguranca.nome;
+            }
+            return item;
+        });
+
+        res.json(modifiedItems);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar itens', error });
     }

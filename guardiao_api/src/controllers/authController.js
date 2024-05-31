@@ -5,7 +5,6 @@ const responseFormatter = require('../utils/response');
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  console.log('here');
   try {
     const security = await SecurityModel.findOne({ email });
     if (!security) {

@@ -17,5 +17,9 @@ interface RetiradaProps {
     nomeAluno?: string;
     raAluno ?: string;
     dataRetirada ?: string;
-    seguranca ?: string;
+    seguranca ?: SecurityProps;
+}
+
+interface SecurityProps {
+    nome: string;
 }

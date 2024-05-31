@@ -47,7 +47,7 @@ export const ContainerItems = styled.div<ItemPropsInterface>`
 
         img {
             width: 80px;
-            height: auto;
+            height: 80px;
             border-radius: 5px;
         }
 
@@ -69,4 +69,13 @@ export const ContainerItems = styled.div<ItemPropsInterface>`
             }
         }
     }
+`
+
+export const EmptyContainer = styled.div`
+    background-color: ${props => props.theme["base-background"]};
+    padding: 10px;
+    margin: 30px auto;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
 `
